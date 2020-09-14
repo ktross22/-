@@ -9,6 +9,7 @@ namespace CodeBlogFintess.BL.Model
     ///<symmary>
     //Пол.
     ///<symmary>
+    [Serializable]
     public class Gender
     {
         /// <summary>

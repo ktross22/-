@@ -9,6 +9,7 @@ namespace CodeBlogFintess.BL.Model
     /// <summary>
     /// Пользователь.
     /// </summary>
+    [Serializable]
    public  class User
     {
         #region Свойства
@@ -19,12 +20,12 @@ namespace CodeBlogFintess.BL.Model
         /// <summary>
         /// Пол.
         /// </summary>
-        public Gender Gender { get; }
+        public Gender Gender { get; set; }
         /// <summary>
         /// Дата рождения.
         /// </summary>
 
-        public DateTime BirthDate { get; }
+        public DateTime BirthDate { get; set; }
         /// <summary>
         /// Вес.
         /// </summary>
@@ -35,6 +36,13 @@ namespace CodeBlogFintess.BL.Model
         /// </summary>
 
         public double Height { get; set; }
+
+        //DateTime nowDate = DateTime.Today;
+        //int age = nowDate.Year - BirthDate.Year;
+        //if(birthDate > nowDate.AddYears(-age)) age--;
+
+
+        public int Age { get { return DateTime.Now.Year - BirthDate.Year; } }
         #endregion
        /// <summary>
        /// Создать нового пользователя.
@@ -80,10 +88,17 @@ namespace CodeBlogFintess.BL.Model
             Height = height;
            
         }
-
+        public User(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException("Имя пользователя не может быть пустым или null", nameof(name));
+            }
+            Name = name;
+        }
         public override string ToString()
         {
-            return Name;
+            return Name + "" + Age;
         }
 
     }
